@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Directory with Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #searchBar {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+    @media (max-width: 600px) {
+      th, td {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Employee Directory</h1>
+    <input type="text" id="searchBar" placeholder="Search employees by name, department, or role...">
+
+    <table id="employeeTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>101</td>
+          <td>Priya Sharma</td>
+          <td>HR</td>
+          <td>HR Manager</td>
+        </tr>
+        <tr>
+          <td>102</td>
+          <td>Arun Kumar</td>
+          <td>IT</td>
+          <td>Software Engineer</td>
+        </tr>
+        <tr>
+          <td>103</td>
+          <td>Divya Ramesh</td>
+          <td>Finance</td>
+          <td>Accountant</td>
+        </tr>
+        <tr>
+          <td>104</td>
+          <td>Vijay Raj</td>
+          <td>Marketing</td>
+          <td>Marketing Lead</td>
+        </tr>
+        <tr>
+          <td>105</td>
+          <td>Meena Joseph</td>
+          <td>Support</td>
+          <td>Customer Executive</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const searchBar = document.getElementById('searchBar');
+    const table = document.getElementById('employeeTable').getElementsByTagName('tbody')[0];
+
+    searchBar.addEventListener('keyup', function() {
+      const filter = searchBar.value.toLowerCase();
+      const rows = table.getElementsByTagName('tr');
+
+      for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName('td');
+        let match = false;
+
+        for (let j = 0; j < cells.length; j++) {
+          if (cells[j]) {
+            const textValue = cells[j].textContent || cells[j].innerText;
+            if (textValue.toLowerCase().includes(filter)) {
+              match = true;
+              break;
+            }
+          }
+        }
+
+        rows[i].style.display = match ? '' : 'none';
+      }
+    });
+  </script>
+</body>
+</html>
